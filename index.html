@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaShop | Tienda Virtual</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+    <div class="container">
+
+        <a class="navbar-brand" href="#">
+            <i class="fa-solid fa-bag-shopping"></i>
+            Nova<span>Shop</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#inicio">Inicio</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#productos">Productos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#nosotros">Nosotros</a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-btn" id="themeToggle" title="Cambiar tema">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <button class="cart-btn" id="openCart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Carrito</span>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="inicio">
+    <div class="container">
+        <div class="hero-content">
+
+            <div class="hero-text">
+                <span class="hero-label">TU EXPERIENCIA DE COMPRA</span>
+
+                <h1>Descubre productos que hacen la diferencia.</h1>
+
+                <p>
+                    Explora nuestra colección de productos y encuentra
+                    lo que necesitas en un solo lugar.
+                </p>
+
+                <a href="#productos" class="btn-shop">
+                    Explorar productos
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="hero-image">
+                <img
+                    src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=900&q=85"
+                    alt="Experiencia de compras en línea">
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<!-- BENEFICIOS -->
+<section class="benefits">
+    <div class="container">
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="benefit-item">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <div>
+                        <h5>Envíos rápidos</h5>
+                        <p>Compra desde cualquier lugar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="benefit-item">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <div>
+                        <h5>Compra segura</h5>
+                        <p>Una experiencia sencilla y confiable.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="benefit-item">
+                    <i class="fa-solid fa-headset"></i>
+                    <div>
+                        <h5>Atención al cliente</h5>
+                        <p>Estamos aquí para ayudarte.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section class="products-section" id="productos">
+
+    <div class="container">
+
+        <div class="section-heading">
+            <span>CATÁLOGO</span>
+            <h2>Explora nuestros productos</h2>
+            <p>Encuentra tus productos favoritos.</p>
+        </div>
+
+        <!-- BUSCADOR -->
+        <div class="product-tools">
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Buscar productos...">
+            </div>
+
+            <select id="categoryFilter">
+                <option value="all">Todas las categorías</option>
+            </select>
+
+            <select id="sortFilter">
+                <option value="default">Ordenar por</option>
+                <option value="low">Precio: menor a mayor</option>
+                <option value="high">Precio: mayor a menor</option>
+                <option value="rating">Mejor valorados</option>
+            </select>
+
+        </div>
+
+        <!-- CARGA -->
+        <div id="loading" class="loading">
+            <div class="spinner-border" role="status"></div>
+            <p>Cargando productos...</p>
+        </div>
+
+        <!-- ERROR -->
+        <div id="errorMessage" class="error-message d-none">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h4>No se pudieron cargar los productos</h4>
+            <p>Comprueba tu conexión e inténtalo nuevamente.</p>
+            <button class="btn-shop" id="retryButton">Reintentar</button>
+        </div>
+
+        <!-- PRODUCTOS DINÁMICOS -->
+        <div class="row g-4" id="productsContainer"></div>
+
+        <p class="results-count" id="resultsCount"></p>
+
+    </div>
+</section>
+
+<!-- NOSOTROS -->
+<section class="about-section" id="nosotros">
+    <div class="container">
+        <div class="about-content">
+
+            <div>
+                <span>CONOCE NOVASHOP</span>
+                <h2>Una nueva forma de descubrir productos.</h2>
+                <p>
+                    NovaShop es una tienda virtual académica que utiliza
+                    FakeStoreAPI para consultar y presentar productos
+                    de diferentes categorías mediante solicitudes HTTP.
+                </p>
+            </div>
+
+            <div class="about-icon">
+                <i class="fa-solid fa-store"></i>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+
+            <a class="footer-brand" href="#">
+                <i class="fa-solid fa-bag-shopping"></i>
+                NovaShop
+            </a>
+
+            <p>Proyecto académico | Mirkeila Gómez</p>
+
+            <p class="copyright">
+                © 2026 NovaShop. Todos los derechos reservados.
+            </p>
+
+        </div>
+    </div>
+</footer>
+
+<!-- MODAL DETALLES -->
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" id="productModalContent"></div>
+    </div>
+</div>
+
+<!-- CARRITO LATERAL -->
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<aside class="cart-sidebar" id="cartSidebar">
+
+    <div class="cart-header">
+        <h3><i class="fa-solid fa-cart-shopping"></i> Mi carrito</h3>
+
+        <button id="closeCart" class="close-cart">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+        <p class="empty-cart">Tu carrito está vacío.</p>
+    </div>
+
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total:</span>
+            <strong id="cartTotal">$0.00</strong>
+        </div>
+
+        <button class="checkout-btn" id="checkoutButton">
+            Finalizar compra
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+    </div>
+
+</aside>
+
+<!-- VOLVER ARRIBA -->
+<button id="backToTop" title="Volver arriba">
+    <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<!-- BOOTSTRAP JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JAVASCRIPT -->
+<script src="script.js"></script>
+
+</body>
+</html>
